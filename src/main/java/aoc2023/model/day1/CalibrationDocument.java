@@ -21,12 +21,21 @@ public class CalibrationDocument {
                 .sum();
     }
 
+    public int calculateExtendedCalibration() {
+        return textLines.stream()
+                .map(SpelledOutDigitUtils::insertDigitBeforeFirstSpelledOutDigit)
+                .map(SpelledOutDigitUtils::insertDigitBeforeLastSpelledOutDigit)
+                .mapToInt(this::extractCalibrationValue)
+                .sum();
+    }
+
     private int extractCalibrationValue(String line) {
         var lineDigits = StringUtils.stringToCharList(line).stream()
                 .filter(Character::isDigit)
+                .map(c -> Character.digit(c, 10))
                 .toList();
 
-        var firstAndLastDigit = lineDigits.get(0) + "" + lineDigits.get(lineDigits.size()-1);
+        var firstAndLastDigit = lineDigits.get(0) + "" + lineDigits.get(lineDigits.size() - 1);
         return Integer.parseInt(firstAndLastDigit);
     }
 }

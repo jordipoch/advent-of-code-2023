@@ -20,4 +20,8 @@ public class Day1Controller {
     public int getPart1Result() {
         return calibrationDocument.calculateCalibration();
     }
+
+    public int getPart2Result() {
+        return calibrationDocument.calculateExtendedCalibration();
+    }
 }

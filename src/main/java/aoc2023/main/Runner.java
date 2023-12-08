@@ -14,6 +14,7 @@ public class Runner {
         createInjector();
 
         runDay1Part1();
+        runDay1Part2();
     }
 
     static void createInjector() {
@@ -25,6 +26,14 @@ public class Runner {
 
         int result = controller.getPart1Result();
         logger.info("The sum of calibration values is {}", result);
+        return result;
+    }
+
+    public static int runDay1Part2() {
+        var controller = injector.getInstance(Day1Controller.class);
+
+        int result = controller.getPart2Result();
+        logger.info("The sum of calibration values including spelled out digits is {}", result);
         return result;
     }
 }

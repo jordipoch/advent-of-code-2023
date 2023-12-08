@@ -25,6 +25,21 @@ public class Day1ControllerTest {
     }
 
     @Test
+    public void testGetPart2Result() {
+        Supplier<List<String>> supplier = () -> List.of(
+                "two1nine",
+                "eightwothree",
+                "abcone2threexyz",
+                "xtwone3four",
+                "4nineeightseven2",
+                "zoneight234",
+                "7pqrstsixteen");
+
+        var controller = new Day1Controller(supplier);
+        assertThat(controller.getPart2Result()).isEqualTo(281);
+    }
+
+    @Test
     public void testGetPart1ResultFromInputFile() {
         var supplier = new Day1InputSupplier(new InputFileDataLoaderFactory());
 

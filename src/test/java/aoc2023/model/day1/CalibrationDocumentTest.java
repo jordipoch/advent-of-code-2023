@@ -16,10 +16,37 @@ public class CalibrationDocumentTest {
                 "ab12",
                 "4abc5",
                 "a1b3c2",
-                "18"
+                "18",
+                "cbcvd9"
         );
 
         var calibrationDocument = CalibrationDocument.of(lines);
-        Assertions.assertThat(calibrationDocument.calculateCalibration()).isEqualTo(100);
+        Assertions.assertThat(calibrationDocument.calculateCalibration()).isEqualTo(199);
+    }
+
+    @Test
+    public void testCalculateExtendedCalibration() {
+        var lines = List.of(
+                "123", // 13
+                "1two7", // 17
+                "aone34", // 14
+                "a23sixfb", // 26
+                "atwo3sixfb", // 26
+                "threeightfourb" // 34
+        );
+
+        var calibrationDocument = CalibrationDocument.of(lines);
+        Assertions.assertThat(calibrationDocument.calculateExtendedCalibration()).isEqualTo(130);
+    }
+
+    @Test
+    public void calculateExtendedCalibrationExtraTests() {
+        var lines = List.of(
+                "5eightwox", // 52
+                "eightwox5" // 85
+        );
+
+        var calibrationDocument = CalibrationDocument.of(lines);
+        Assertions.assertThat(calibrationDocument.calculateExtendedCalibration()).isEqualTo(137);
     }
 }
