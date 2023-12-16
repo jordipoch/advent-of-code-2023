@@ -1,4 +1,4 @@
-package aoc2023.controller.annotation;
+package aoc2023.controller.input.annotation;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.Retention;

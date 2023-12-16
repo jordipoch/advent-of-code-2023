@@ -1,6 +1,6 @@
 package aoc2023.controller;
 
-import aoc2023.controller.annotation.Day1;
+import aoc2023.controller.input.annotation.Day1;
 import aoc2023.model.day1.CalibrationDocument;
 
 import javax.inject.Inject;

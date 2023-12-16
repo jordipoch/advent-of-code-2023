@@ -1,8 +1,7 @@
 package aoc2023.controller;
 
-import aoc2023.controller.input.Day1InputSupplier;
+import aoc2023.controller.input.supplier.Day1InputSupplier;
 import aoc2023.input.InputFileDataLoaderFactory;
-import aoc2023.input.InputFileDataLoaderForTest;
 import org.testng.annotations.Test;
 
 import java.util.List;

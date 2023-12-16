@@ -1,5 +1,7 @@
 package aoc2023.library.string;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +26,10 @@ public class StringUtils {
         var builder = new StringBuilder(s);
         var lastIndex = builder.lastIndexOf(search);
         return replaceIfFound(builder, search, replacement, lastIndex);
+    }
+
+    public static List<String> split(String s, String separator) {
+        return Arrays.asList(s.split(separator));
     }
 
     private static String replaceIfFound(StringBuilder builder, String search, String replacement, int lastIndex) {

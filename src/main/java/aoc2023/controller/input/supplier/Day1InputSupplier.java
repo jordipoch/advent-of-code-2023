@@ -1,6 +1,7 @@
-package aoc2023.controller.input;
+package aoc2023.controller.input.supplier;
 
-import aoc2023.controller.annotation.Day1;
+import aoc2023.controller.input.InputDataLoader;
+import aoc2023.controller.input.InputDataLoaderFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

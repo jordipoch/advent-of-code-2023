@@ -27,6 +27,11 @@ public class StringUtilsTest {
         assertThat(StringUtils.replaceLast(s, search, replacement)).isEqualTo(expectedResult);
     }
 
+    @Test(dataProvider = "getSplitTestData")
+    public void testSplit(String s, String separator, List<String> expectedResult) {
+        assertThat(StringUtils.split(s, separator)).isEqualTo(expectedResult);
+    }
+
     @DataProvider(name = "data for stringToCharList test")
     protected Iterator<Object[]> getStringToCharListTestData() {
         return Arrays.asList(new Object[][] {
@@ -35,7 +40,6 @@ public class StringUtilsTest {
                 {"aabbcc123", List.of('a', 'a', 'b', 'b', 'c', 'c', '1', '2', '3')}
         }).iterator();
     }
-
     @DataProvider
     protected Iterator<Object[]> getReplaceFirstTestData() {
         return Arrays.asList(new Object[][] {
@@ -46,6 +50,7 @@ public class StringUtilsTest {
                 {"aaaaa", "aaa", "bbb", "bbbaa"}
         }).iterator();
     }
+
     @DataProvider
     protected Iterator<Object[]> getReplaceLastTestData() {
         return Arrays.asList(new Object[][] {
@@ -54,6 +59,16 @@ public class StringUtilsTest {
                 {"abcc", "c", "e", "abce"},
                 {"ab text cd text", "text", "new", "ab text cd new"},
                 {"aaaaa", "aaa", "bbb", "aabbb"}
+        }).iterator();
+    }
+
+    @DataProvider
+    protected Iterator<Object[]> getSplitTestData() {
+        return Arrays.asList(new Object[][] {
+                {"a:b:c", ":", List.of("a", "b", "c")},
+                {"a.b.c", "\\.", List.of("a", "b", "c")},
+                {"a", ":", List.of("a")},
+                {"abc", "", List.of("a", "b", "c")}
         }).iterator();
     }
 }

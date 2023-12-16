@@ -1,27 +1,20 @@
-package aoc2023.main;
+package aoc2023.main.runner;
 
 import aoc2023.controller.Day1Controller;
-import aoc2023.main.config.InjectorModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Runner {
+public class Day1 extends BaseRunner {
     private static final Logger logger = LogManager.getLogger();
-    static Injector injector;
+
     public static void main(String... args) {
         createInjector();
 
-        runDay1Part1();
-        runDay1Part2();
+        runPart1();
+        runPart2();
     }
 
-    static void createInjector() {
-        injector = Guice.createInjector(new InjectorModule());
-    }
-
-    public static int runDay1Part1() {
+    public static int runPart1() {
         var controller = injector.getInstance(Day1Controller.class);
 
         int result = controller.getPart1Result();
@@ -29,7 +22,7 @@ public class Runner {
         return result;
     }
 
-    public static int runDay1Part2() {
+    public static int runPart2() {
         var controller = injector.getInstance(Day1Controller.class);
 
         int result = controller.getPart2Result();
