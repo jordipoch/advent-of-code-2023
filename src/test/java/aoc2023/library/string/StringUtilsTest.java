@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringUtilsTest {
@@ -35,7 +36,7 @@ public class StringUtilsTest {
     @DataProvider(name = "data for stringToCharList test")
     protected Iterator<Object[]> getStringToCharListTestData() {
         return Arrays.asList(new Object[][] {
-                {"", Collections.emptyList()},
+                {"", emptyList()},
                 {"abc", List.of('a', 'b', 'c')},
                 {"aabbcc123", List.of('a', 'a', 'b', 'b', 'c', 'c', '1', '2', '3')}
         }).iterator();

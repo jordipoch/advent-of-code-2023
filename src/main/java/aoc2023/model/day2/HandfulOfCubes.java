@@ -2,6 +2,9 @@ package aoc2023.model.day2;
 
 import aoc2023.library.string.StringUtils;
 
+import java.lang.module.Configuration;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,6 +30,17 @@ class HandfulOfCubes {
     boolean isAllowedByConfiguration(GameConfiguration configuration) {
         return cubeQuantities.stream()
                 .allMatch(configuration::isCubeQuantityAllowed);
+    }
+
+    public GameConfiguration updateMinConfiguration(GameConfiguration configuration) {
+        for (var cubeQuantity : cubeQuantities) {
+            configuration.updateMinConfiguration(cubeQuantity);
+        }
+        return configuration;
+    }
+
+    List<CubeQuantity> getCubeQuantities() {
+        return Collections.unmodifiableList(cubeQuantities);
     }
 
     @Override

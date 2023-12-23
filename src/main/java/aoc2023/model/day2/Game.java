@@ -10,28 +10,32 @@ import java.util.stream.Collectors;
 class Game {
     private final int gameNum;
     private final List<HandfulOfCubes> groupsOfCubesGrabbed;
-    private final GameConfiguration gameConfiguration;
+    private final GameConfiguration defaultConfiguration = GameConfiguration.DEFAULT;
 
-    private Game(int gameNum, List<HandfulOfCubes> groupsOfCubesGrabbed, GameConfiguration gameConfiguration) {
+    private Game(int gameNum, List<HandfulOfCubes> groupsOfCubesGrabbed) {
         this.gameNum = gameNum;
         this.groupsOfCubesGrabbed = groupsOfCubesGrabbed;
-        this.gameConfiguration = gameConfiguration;
     }
 
-    static Game create(int gameNum, List<HandfulOfCubes> groupsOfCubesGrabbed, GameConfiguration gameConfiguration) {
-        return new Game(gameNum, groupsOfCubesGrabbed, gameConfiguration);
+    static Game create(int gameNum, List<HandfulOfCubes> groupsOfCubesGrabbed) {
+        return new Game(gameNum, groupsOfCubesGrabbed);
     }
 
-    public static Game create(String text, GameConfiguration gameConfiguration) {
+    public static Game create(String text) {
         return Builder.aGame()
                 .withText(text)
-                .withGameConfiguration(gameConfiguration)
                 .build();
     }
 
     public boolean isGamePossible() {
         return groupsOfCubesGrabbed.stream()
-            .allMatch(hc -> hc.isAllowedByConfiguration(gameConfiguration));
+            .allMatch(hc -> hc.isAllowedByConfiguration(defaultConfiguration));
+    }
+
+    public int calculateGamePower() {
+        var initialConfiguration = GameConfiguration.createEmpty();
+        groupsOfCubesGrabbed.forEach((groupOfCubes) -> groupOfCubes.updateMinConfiguration(initialConfiguration));
+        return initialConfiguration.calculatePower();
     }
 
     public int getGameNum() {
@@ -62,8 +66,6 @@ class Game {
     private static class Builder {
         private static final Pattern GAME_NUM_PATTERN = Pattern.compile("^Game (\\d{1,3})$");
         private String gameText;
-        private GameConfiguration gameConfiguration;
-
         private static Builder aGame() {
             return new Builder();
         }
@@ -73,14 +75,8 @@ class Game {
             return this;
         }
 
-        public Builder withGameConfiguration(GameConfiguration gameConfiguration) {
-            this.gameConfiguration = gameConfiguration;
-            return this;
-        }
-
         private Game build() {
             Objects.requireNonNull(gameText);
-            Objects.requireNonNull(gameConfiguration);
 
             var gameParts = parseText();
             var handfulOfCubesList = gameParts.handfulOfCubesTexts().stream()
@@ -89,9 +85,7 @@ class Game {
 
             return new Game(
                     gameParts.gameNum(),
-                    handfulOfCubesList,
-                    gameConfiguration
-            );
+                    handfulOfCubesList);
         }
 
         private GameParts parseText() {

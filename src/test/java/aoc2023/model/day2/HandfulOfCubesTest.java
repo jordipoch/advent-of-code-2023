@@ -8,11 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import static aoc2023.model.day2.Cube.*;
+import static aoc2023.model.day2.GameConfiguration.createEmpty;
+import static aoc2023.model.day2.GameConfiguration.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HandfulOfCubesTest {
 
-    private final GameConfiguration gameConfiguration = new GameConfiguration();
+    private final GameConfiguration gameConfiguration = GameConfiguration.DEFAULT;
     @Test(dataProvider = "getTestData")
     public void testIsAllowedByConfiguration(List<CubeQuantity> cubeQuantities, boolean expectedResult) {
         var handfulOfCubes = new HandfulOfCubes(cubeQuantities);
@@ -34,6 +36,11 @@ public class HandfulOfCubesTest {
         )));
     }
 
+    @Test (dataProvider = "getUpdateMinConfigurationTestData")
+    public void testUpdateMinConfiguration(GameConfiguration initialConfiguration, HandfulOfCubes handfulOfCubes, GameConfiguration expectedMinConfiguration) {
+        assertThat(handfulOfCubes.updateMinConfiguration(initialConfiguration)).isEqualTo(expectedMinConfiguration);
+    }
+
     @DataProvider
     private Iterator<Object[]> getTestData() {
         return Arrays.asList(new Object[][] {
@@ -51,5 +58,16 @@ public class HandfulOfCubesTest {
                 { "5 red, 12 green", true },
                 { "15 blue", false },
         }).iterator();
+    }
+
+    @DataProvider
+    private Iterator<Object[]> getUpdateMinConfigurationTestData() {
+        return Arrays.asList(new Object[][] {
+                {createEmpty(), HandfulOfCubes.create("5 red, 12 green, 18 blue"), of(5, 12, 18)},
+                {of(3, 0, 4), HandfulOfCubes.create("2 green"), of(3, 2, 4)},
+                {of(3, 0, 4), HandfulOfCubes.create("6 blue, 2 red"), of(3, 0, 6)},
+                {of(3, 8, 4), HandfulOfCubes.create("6 blue, 2 red, 8 green"), of(3, 8, 6)},
+                {of(3, 8, 4), HandfulOfCubes.create("0 green"), of(3, 8, 4)},
+        }).listIterator();
     }
 }

@@ -10,10 +10,8 @@ public class GameInfoRecorder {
     }
 
     public static GameInfoRecorder create(List<String> gameLines) {
-        var gameConfiguration = new GameConfiguration();
-
         var games = gameLines.stream()
-                .map(line -> Game.create(line, gameConfiguration))
+                .map(Game::create)
                 .toList();
 
         return new GameInfoRecorder(games);
@@ -23,6 +21,12 @@ public class GameInfoRecorder {
         return games.stream()
                 .filter(Game::isGamePossible)
                 .mapToInt(Game::getGameNum)
+                .sum();
+    }
+
+    public int calculateSumOfGamePowers() {
+        return games.stream()
+                .mapToInt(Game::calculateGamePower)
                 .sum();
     }
 }

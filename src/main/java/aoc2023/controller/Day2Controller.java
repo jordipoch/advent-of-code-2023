@@ -20,4 +20,7 @@ public class Day2Controller {
     public int getPart1Result() {
         return gameInfoRecorder.calculateSumOfPossibleGameIds();
     }
+    public int getPart2Result() {
+        return gameInfoRecorder.calculateSumOfGamePowers();
+    }
 }

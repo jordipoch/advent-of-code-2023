@@ -15,5 +15,6 @@ public class allDaysRunner extends BaseRunner {
 
     private static void runDay2() {
         Day2.runPart1();
+        Day2.runPart2();
     }
 }
