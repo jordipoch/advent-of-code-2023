@@ -69,7 +69,9 @@ public class StringUtilsTest {
                 {"a:b:c", ":", List.of("a", "b", "c")},
                 {"a.b.c", "\\.", List.of("a", "b", "c")},
                 {"a", ":", List.of("a")},
-                {"abc", "", List.of("a", "b", "c")}
+                {"abc", "", List.of("a", "b", "c")},
+                {".123#", "\\D", List.of("123")},
+                {".123#45@", "\\D", List.of("123", "45")}
         }).iterator();
     }
 }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class StringUtils {
     private StringUtils() {
@@ -29,7 +30,9 @@ public class StringUtils {
     }
 
     public static List<String> split(String s, String separator) {
-        return Arrays.asList(s.split(separator));
+        return Arrays.stream(s.split(separator))
+                .filter(Predicate.not(String::isEmpty))
+                .toList();
     }
 
     private static String replaceIfFound(StringBuilder builder, String search, String replacement, int lastIndex) {

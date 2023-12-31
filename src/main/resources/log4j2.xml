@@ -15,5 +15,6 @@
         <Root level="info">
             <AppenderRef ref="File"/>
         </Root>
+        <Logger name="aoc2023.model.day3" level="debug" />
     </Loggers>
 </Configuration>
