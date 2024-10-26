@@ -26,4 +26,9 @@ public class Day3ControllerTest {
     public void testGetPart1Result() {
         assertThat(controller.getPart1Result()).isEqualTo(4361);
     }
+
+    @Test
+    public void testGetPart2Result() {
+        assertThat(controller.getPart2Result()).isEqualTo(467835);
+    }
 }

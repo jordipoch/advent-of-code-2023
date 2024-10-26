@@ -21,4 +21,8 @@ public class Day3Controller {
     public long getPart1Result() {
         return engine.calculateSumOfPartNumbers();
     }
+
+    public long getPart2Result() {
+        return engine.calculateSumOfGearRatios();
+    }
 }

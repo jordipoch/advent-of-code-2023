@@ -45,8 +45,7 @@ public class EngineNumbersParser {
                         coord -> coord2D(coord.x() + 1, yPos))
                 .toList();
 
-        var engineNumber = EngineNumber.create(Integer.parseInt(number.text()), coords);
-        return engineNumber;
+        return EngineNumber.create(Integer.parseInt(number.text()), coords);
     }
 }
 

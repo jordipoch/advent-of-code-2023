@@ -115,4 +115,109 @@ public class GondolaLiftEngineTest {
                         525
         );
     }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithOneGear() {
+        var input = List.of(
+                "2*4",
+                "...",
+                "..."
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(8);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithSingleStarAdjacentTo3Numbers() {
+        var input = List.of(
+                "2*4",
+                ".10",
+                "..."
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(0);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithNoStars() {
+        var input = List.of(
+                "2#4",
+                ".10",
+                "..."
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(0);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithTwoGears() {
+        var input = List.of(
+                "2*4",
+                "...",
+                "5*3"
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(23);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithTwoStarsAndOneGear() {
+        var input = List.of(
+                "2*4",
+                ".5.",
+                ".*3"
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(15);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithThreeStarsAndTwoGear() {
+        var input = List.of(
+                "2@44",
+                "..5*",
+                "*./.",
+                "12*2"
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(44*5 + 12*2);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithThreeStarsAndTwoGearDifferentVariant() {
+        var input = List.of(
+                "2@44",
+                "..5*",
+                "*2/.",
+                "12*2"
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(44*5 + 12*2);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosWithComplexScenario() {
+        var input = List.of(
+                ".23*.....*", // 23*498 + 0
+                "10/.498..4",
+                "#397@...*5", // 0
+                "...%134..6",
+                "830..../*.", // 0
+                "10$%25....",
+                "*56.**..*.", // 0 + 25*91 + 25*91 + 0
+                "675@91@..*", // 0
+                "35*%.769..", // 675*35
+                "*..$70/.##"  // 0
+        );
+
+        var engine = factory.create(input);
+        assertThat(engine.calculateSumOfGearRatios()).isEqualTo(23*498 + 25*91 + 25*91 + 675*35);
+    }
 }

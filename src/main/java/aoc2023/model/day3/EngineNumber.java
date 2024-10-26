@@ -26,12 +26,13 @@ public final class EngineNumber {
                 .anyMatch(coord2D -> hasAdjacentSymbols(coord2D.x(), coord2D.y()));
     }
 
-    int getValue() {
-        return value;
+    public boolean isAdjacent(Coord2D position) {
+        return digitPositions.stream()
+                .anyMatch(coord2D -> coord2D.isAdjacentTo(position));
     }
 
-    List<Coord2D> getDigitPositions() {
-        return digitPositions;
+    int getValue() {
+        return value;
     }
 
     private boolean hasAdjacentSymbols(int x, int y) {

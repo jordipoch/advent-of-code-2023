@@ -1,7 +1,10 @@
 package aoc2023.model.day3;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import static aoc2023.model.day3.Coord2D.coord2D;
 import static java.lang.Character.isDigit;
 
 class EngineSchematic {
@@ -15,9 +18,16 @@ class EngineSchematic {
         this.ySize = ySize;
     }
 
-    boolean isPartNumber(EngineNumber number) {
-        return number.getDigitPositions().stream()
-                .anyMatch(coord2D -> hasAdjacentSymbols(coord2D.x(), coord2D.y()));
+    List<Coord2D> getStarPositions() {
+        List<Coord2D> positions = new ArrayList<>();
+        for (int y = 0; y < ySize; y++) {
+            for (int x = 0; x < xSize; x++) {
+                if (getCharAt(x, y) == '*')
+                    positions.add(coord2D(x, y));
+            }
+        }
+
+        return positions;
     }
 
     char getCharAt(int x, int y) {
