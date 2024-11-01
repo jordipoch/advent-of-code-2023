@@ -1,7 +1,6 @@
 package aoc2023.model.day3;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static aoc2023.model.day3.Coord2D.coord2D;
@@ -78,5 +77,27 @@ class EngineSchematic {
             return engineData[y][x] != '.' && !isDigit(engineData[y][x]);
         else
             return false;
+    }
+
+    public List<Coord2D> getAdjacentDigitPositions(Coord2D origin) {
+        return getAdjacentPositions(origin).stream()
+                .filter(position -> !position.equals(origin))
+                .filter(this::isPositionInsideBounds)
+                .filter(position -> isDigit(getCharAt(position.x(), position.y())))
+                .toList();
+    }
+
+    private static ArrayList<Coord2D> getAdjacentPositions(Coord2D origin) {
+        final var offsets = List.of(-1, 0, 1);
+        var adjacentPositions = new ArrayList<Coord2D>();
+        for (var yOffset : offsets)
+            for(var xOffset : offsets )
+                adjacentPositions.add(coord2D(origin.x()+xOffset, origin.y()+yOffset));
+        return adjacentPositions;
+    }
+
+    private boolean isPositionInsideBounds(Coord2D position) {
+        return position.x() >= 0 && position.x() < xSize &&
+                position.y() >= 0 && position.y() < ySize;
     }
 }

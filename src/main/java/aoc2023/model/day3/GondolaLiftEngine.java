@@ -29,7 +29,7 @@ public class GondolaLiftEngine {
                 .sum();
     }
 
-    private List<EngineNumber> getAdjacentNumbers(Coord2D position) {
+    protected List<EngineNumber> getAdjacentNumbers(Coord2D position) {
         return numbers.stream()
                 .filter(number -> number.isAdjacent(position))
                 .toList();

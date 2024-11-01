@@ -1,7 +1,6 @@
 package aoc2023.model.day3.parser;
 
 import aoc2023.model.day3.EngineNumber;
-import aoc2023.model.day3.parser.EngineNumbersParser;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

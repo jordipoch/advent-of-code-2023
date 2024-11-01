@@ -2,8 +2,6 @@ package aoc2023.model.day2;
 
 import aoc2023.library.string.StringUtils;
 
-import java.lang.module.Configuration;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;

@@ -1,8 +1,6 @@
 package aoc2023.model.day3.parser;
 
 import aoc2023.model.day3.EngineNumber;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -1,14 +1,16 @@
 package aoc2023.main.config;
 
+import aoc2023.controller.input.InputDataLoader;
+import aoc2023.controller.input.InputDataLoaderFactory;
 import aoc2023.controller.input.annotation.Day1;
 import aoc2023.controller.input.annotation.Day2;
 import aoc2023.controller.input.annotation.Day3;
 import aoc2023.controller.input.supplier.Day1InputSupplier;
-import aoc2023.controller.input.InputDataLoader;
-import aoc2023.controller.input.InputDataLoaderFactory;
 import aoc2023.controller.input.supplier.Day2InputSupplier;
 import aoc2023.controller.input.supplier.Day3InputSupplier;
 import aoc2023.data.InputFileDataLoaderForProd;
+import aoc2023.model.day3.GondolaLiftEngineFactory;
+import aoc2023.model.day3.GondolaLiftOptimizedEngineFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
@@ -22,6 +24,7 @@ public class InjectorModule extends AbstractModule {
     protected void configure() {
         configureInputDataLoaderFactory();
         configureInputSuppliers();
+        configureFactories();
     }
 
     private void configureInputDataLoaderFactory() {
@@ -42,5 +45,10 @@ public class InjectorModule extends AbstractModule {
         bind(new TypeLiteral<Supplier<List<String>>>() {})
                 .annotatedWith(Day3.class)
                 .to(Day3InputSupplier.class);
+    }
+
+    private void configureFactories() {
+        // Day 3
+        bind(GondolaLiftEngineFactory.class).to(GondolaLiftOptimizedEngineFactory.class);
     }
 }

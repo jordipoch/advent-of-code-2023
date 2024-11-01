@@ -1,5 +1,7 @@
 package aoc2023.model.day3;
 
+import java.util.Objects;
+
 import static java.lang.Math.abs;
 
 public record Coord2D(int x, int y) {
@@ -16,5 +18,17 @@ public record Coord2D(int x, int y) {
     @Override
     public String toString() {
         return String.format("(%d, %d)", x, y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Coord2D coord2D)) return false;
+        return x == coord2D.x && y == coord2D.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

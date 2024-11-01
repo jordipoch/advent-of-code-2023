@@ -20,6 +20,10 @@ public final class EngineNumber {
         return new EngineNumber(value, digitPositions);
     }
 
+    public List<Coord2D> getDigitPositions() {
+        return digitPositions;
+    }
+
     boolean isPartNumber(EngineSchematic engineSchematic) {
         this.engineSchematic = engineSchematic;
         return digitPositions.stream()

@@ -1,6 +1,5 @@
 package aoc2023.model.day2;
 
-import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import java.util.List;

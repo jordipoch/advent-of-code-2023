@@ -1,7 +1,6 @@
 package aoc2023.library.string;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;

@@ -23,8 +23,7 @@ public class GondolaLiftEngineFactory {
         return new GondolaLiftEngine(engineSchematic, numbers);
     }
 
-
-    private List<EngineNumber> createEngineNumbers(List<String> input) {
+    protected List<EngineNumber> createEngineNumbers(List<String> input) {
         return engineNumbersParser.parse(input);
     }
 }
