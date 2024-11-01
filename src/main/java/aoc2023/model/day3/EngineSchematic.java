@@ -17,30 +17,6 @@ class EngineSchematic {
         this.ySize = ySize;
     }
 
-    List<Coord2D> getStarPositions() {
-        List<Coord2D> positions = new ArrayList<>();
-        for (int y = 0; y < ySize; y++) {
-            for (int x = 0; x < xSize; x++) {
-                if (getCharAt(x, y) == '*')
-                    positions.add(coord2D(x, y));
-            }
-        }
-
-        return positions;
-    }
-
-    char getCharAt(int x, int y) {
-        return engineData[y][x];
-    }
-
-    public int getXSize() {
-        return xSize;
-    }
-
-    public int getYSize() {
-        return ySize;
-    }
-
     static EngineSchematic create(List<String> engineInputData) {
         return new EngineSchematic(
                 createEngineData(engineInputData),
@@ -55,6 +31,27 @@ class EngineSchematic {
             chars[y] = engineInputData.get(y).toCharArray();
         }
         return chars;
+    }
+
+    private char getCharAt(int x, int y) {
+        return engineData[y][x];
+    }
+
+    List<Coord2D> getStarPositions() {
+        List<Coord2D> positions = new ArrayList<>();
+        for (int y = 0; y < ySize; y++) {
+            for (int x = 0; x < xSize; x++) {
+                if (getCharAt(x, y) == '*')
+                    positions.add(coord2D(x, y));
+            }
+        }
+
+        return positions;
+    }
+
+    boolean isPartNumber(EngineNumber engineNumber) {
+        return engineNumber.getDigitPositions().stream()
+                .anyMatch(coord2D -> hasAdjacentSymbols(coord2D.x(), coord2D.y()));
     }
 
     private boolean hasAdjacentSymbols(int x, int y) {
@@ -74,7 +71,7 @@ class EngineSchematic {
     private boolean safeCheckAdjacentSymbol(int x, int y) {
         if (y >= 0 && y < ySize &&
                 x >= 0 && x < xSize)
-            return engineData[y][x] != '.' && !isDigit(engineData[y][x]);
+            return getCharAt(x, y) != '.' && !isDigit(getCharAt(x, y));
         else
             return false;
     }

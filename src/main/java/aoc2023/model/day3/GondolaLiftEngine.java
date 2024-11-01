@@ -12,7 +12,7 @@ public class GondolaLiftEngine {
 
     public long calculateSumOfPartNumbers() {
         return numbers.stream()
-                .filter(engineNumber -> engineNumber.isPartNumber(engineSchematic))
+                .filter(engineSchematic::isPartNumber)
                 .mapToInt(EngineNumber::getValue)
                 .sum();
     }
